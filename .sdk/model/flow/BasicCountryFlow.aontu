@@ -1,0 +1,32 @@
+# BasicCountryFlow
+
+main: kit: flow: BasicCountryFlow:
+{
+  entity: "country",
+  kind: "basic",
+  name: "BasicCountryFlow",
+  step: [
+    {
+      i: {
+        ref: "country_ref01",
+        srcdatavar: "country_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "country01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-country_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCountryFlow"
+}

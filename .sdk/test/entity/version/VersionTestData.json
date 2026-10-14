@@ -1,0 +1,36 @@
+{
+  "existing": {
+    "version": {
+      "VERSION00": {
+        "name": "s14",
+        "version": "s15",
+        "id": "VERSION00"
+      },
+      "VERSION01": {
+        "name": "s28",
+        "version": "s29",
+        "id": "VERSION01"
+      },
+      "VERSION02": {
+        "name": "s3c",
+        "version": "s3d",
+        "id": "VERSION02"
+      }
+    }
+  },
+  "new": {
+    "version": {
+      "version_ref01": {
+        "name": "s50",
+        "version": "s51"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/v4/Versions": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

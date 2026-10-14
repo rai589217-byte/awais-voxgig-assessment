@@ -1,0 +1,4 @@
+{
+  point: "warning"
+  note: "no server URL in the definition (servers[0].url): the SDK takes it as the server variable `base`; set the `server` build option to fix one"
+}

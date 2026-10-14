@@ -1,0 +1,22 @@
+# BasicCountryV4DtoFlow
+
+main: kit: flow: BasicCountryV4DtoFlow:
+{
+  entity: "country_v4_dto",
+  kind: "basic",
+  name: "BasicCountryV4DtoFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "country_v4_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCountryV4DtoFlow"
+}

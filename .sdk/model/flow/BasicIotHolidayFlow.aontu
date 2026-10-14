@@ -1,0 +1,33 @@
+# BasicIotHolidayFlow
+
+main: kit: flow: BasicIotHolidayFlow:
+{
+  entity: "iot_holiday",
+  kind: "basic",
+  name: "BasicIotHolidayFlow",
+  step: [
+    {
+      i: {
+        ref: "iot_holiday_ref01",
+        srcdatavar: "iot_holiday_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "iot_holiday01",
+        iot_holiday_id: "iot_holiday01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-iot_holiday_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicIotHolidayFlow"
+}

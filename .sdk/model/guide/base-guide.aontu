@@ -1,0 +1,48 @@
+# Generated from the API definition and overwritten on every build: do not
+# edit this file. Put customizations in the guide entry file, which includes
+# this one and overrides its defaults:
+#   guide.aontu
+
+guide: {
+  metrics: count: entity: 5
+  metrics: count: path: 6
+  metrics: count: method: 6
+
+  entity: country: {
+    path: "/api/v4/Countries/{countryCode}": {
+      rename: param: "countryCode": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: country_v4_dto: {
+    path: "/api/v4/Countries/Available": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: iot_holiday: {
+    path: "/api/v4/IotHolidays/{isoCode}/IsToday/{offset}": {
+      rename: param: "isoCode": *"iot_holiday_id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: public_holiday_v4_dto: {
+    path: "/api/v4/Holidays/{countryCode}/Next": {
+      rename: param: "countryCode": *"country_code"
+      op: list: method: *GET
+    }
+    path: "/api/v4/Holidays/{countryCode}/{year}": {
+      rename: param: "countryCode": *"country_code"
+      op: list: method: *GET
+    }
+  }
+
+  entity: version: {
+    path: "/api/v4/Versions": {
+      op: load: method: *GET
+    }
+  }
+
+}

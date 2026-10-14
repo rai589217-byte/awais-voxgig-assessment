@@ -1,0 +1,28 @@
+# BasicVersionFlow
+
+main: kit: flow: BasicVersionFlow:
+{
+  entity: "version",
+  kind: "basic",
+  name: "BasicVersionFlow",
+  step: [
+    {
+      i: {
+        ref: "version_ref01",
+        srcdatavar: "version_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-version_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicVersionFlow"
+}

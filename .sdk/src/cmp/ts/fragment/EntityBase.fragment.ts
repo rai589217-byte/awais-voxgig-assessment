@@ -1,0 +1,277 @@
+
+import { inspect } from 'node:util'
+
+import {
+  ProjectNameSDK,
+} from './ProjectNameSDK'
+
+import {
+  Utility
+} from './utility/Utility'
+
+import type {
+  Context,
+} from './types'
+
+
+class ProjectNameEntityBase<D = any> {
+  name = ''
+  name_ = ''
+  Name = ''
+
+  _client: ProjectNameSDK
+  _utility: Utility
+  _entopts: any
+  // `_data`/`_match` hold accreted partial state (they start `{}` and fill in
+  // as ops resolve), so they are `Partial<D>` — the full `D` is only asserted
+  // at the `data()` return boundary.
+  _data: Partial<D>
+  _match: Partial<D>
+  _entctx: Context
+
+  _deleted: boolean
+
+
+  constructor(client: ProjectNameSDK, entopts: any) {
+    entopts = entopts || {}
+    entopts.active = false !== entopts.active
+
+    this._client = client
+    this._entopts = entopts
+    this._utility = client.utility()
+    this._data = {}
+    this._match = {}
+    this._deleted = false
+
+    const makeContext = this._utility.makeContext
+
+    this._entctx = makeContext({
+      entity: this,
+      entopts,
+    }, client._rootctx)
+
+    const featureHook = this._utility.featureHook
+    featureHook(this._entctx, 'PostConstructEntity')
+  }
+
+  // True once `remove` has succeeded on this instance. `remove` resolves to
+  // the entity like every other operation, so this is how a caller tells a
+  // removed record from a live one.
+  markDeleted(this: any): void {
+    this._deleted = true
+  }
+
+
+  deleted(this: any): boolean {
+    return true === this._deleted
+  }
+
+
+  entopts() {
+    return this._utility.struct.merge([{}, this._entopts])
+  }
+
+  client() {
+    return this._client
+  }
+
+
+  data(this: any, data?: Partial<D>): D {
+    const struct = this._utility.struct
+    const featureHook = this._utility.featureHook
+
+    if (null != data) {
+      this._data = struct.clone(data)
+      featureHook(this._entctx, 'SetData')
+    }
+
+    featureHook(this._entctx, 'GetData')
+    let out = struct.clone(this._data)
+
+    return out
+  }
+
+
+  match(this: any, match?: Partial<D>): Partial<D> {
+    const struct = this._utility.struct
+    const featureHook = this._utility.featureHook
+
+    if (null != match) {
+      this._match = struct.clone(match)
+      featureHook(this._entctx, 'SetMatch')
+    }
+
+    featureHook(this._entctx, 'GetMatch')
+    let out = struct.clone(this._match)
+
+    return out
+  }
+
+
+  async *stream(this: any, action: string, args?: any, callopts?: any): AsyncGenerator<any> {
+    const utility = this._utility
+    const {
+      makeContext, done, featureHook,
+      // The registry name is `makeError`; `error` is the local alias.
+      makeError: error,
+    } = utility
+
+    callopts = callopts || {}
+    const ctrl: any = { ...(callopts.ctrl || {}), stream: callopts }
+    if (null != callopts.signal) {
+      ctrl.signal = callopts.signal
+    }
+    const signal = ctrl.signal
+
+    const ctx: Context = makeContext({
+      opname: action,
+      ctrl,
+      match: this._match,
+      data: this._data,
+      ...(args || {}),
+    }, this._entctx)
+
+    // Outbound: expose the caller's async-iterable payload so the request
+    // builder / transport can stream it as the request body.
+    if (null != callopts.body) {
+      ;(ctx as any).reqdata = { ...((ctx as any).reqdata || {}), body$: callopts.body }
+      ;(ctx as any).stream_out = callopts.body
+    }
+
+    try {
+      const failed = await this._streamSteps(ctx)
+      const result: any = ctx.result
+
+      // Inbound: prefer the streaming feature's incremental iterator; else
+      // fall back to the materialised items so `stream` always yields.
+      if (null == failed && result && 'function' === typeof result.stream) {
+        // done() does not run on this path, so its record is cleaned here.
+        utility.cleanExplain(ctx)
+        for await (const item of result.stream()) {
+          if (signal && signal.aborted) { return }
+          yield item
+        }
+      }
+      else {
+        // A failed step leaves through makeError, as an operation's does.
+        const data = null == failed ? done(ctx) : error(ctx, failed)
+        const items = Array.isArray(data) ? data : (null == data ? [] : [data])
+        for (const item of items) {
+          if (signal && signal.aborted) { return }
+          yield item
+        }
+      }
+    }
+    catch (err: any) {
+      // What a hook throws here must not escape the cleaning below.
+      try {
+        const fres = featureHook(ctx, 'PreUnexpected')
+        if (fres instanceof Promise) { await fres }
+      }
+      catch (hookerr: any) {
+        err = hookerr
+      }
+
+      // An abort ends the stream quietly, whenever it lands.
+      const e = this._unexpected(ctx, err)
+      if (e && true !== signal?.aborted) { throw e }
+    }
+  }
+
+
+  // The steps an operation runs, with their hooks; the first that fails
+  // hands back its error.
+  async _streamSteps(this: any, ctx: Context): Promise<Error | undefined> {
+    const {
+      featureHook, makePoint, makeSpec, makeRequest, makeResponse, makeResult,
+    } = this._utility
+
+    let fres: any
+
+    fres = featureHook(ctx, 'PrePoint'); if (fres instanceof Promise) { await fres }
+    ctx.out.point = makePoint(ctx); if (ctx.out.point instanceof Error) { return ctx.out.point }
+
+    fres = featureHook(ctx, 'PreSpec'); if (fres instanceof Promise) { await fres }
+    ctx.out.spec = makeSpec(ctx); if (ctx.out.spec instanceof Error) { return ctx.out.spec }
+
+    fres = featureHook(ctx, 'PreRequest'); if (fres instanceof Promise) { await fres }
+    ctx.out.request = await makeRequest(ctx); if (ctx.out.request instanceof Error) { return ctx.out.request }
+
+    fres = featureHook(ctx, 'PreResponse'); if (fres instanceof Promise) { await fres }
+    ctx.out.response = await makeResponse(ctx); if (ctx.out.response instanceof Error) { return ctx.out.response }
+
+    fres = featureHook(ctx, 'PreResult'); if (fres instanceof Promise) { await fres }
+    ctx.out.result = await makeResult(ctx); if (ctx.out.result instanceof Error) { return ctx.out.result }
+
+    fres = featureHook(ctx, 'PreDone'); if (fres instanceof Promise) { await fres }
+  }
+
+
+  toJSON() {
+    const struct = this._utility.struct
+    return struct.merge([{}, struct.getdef(this._data, {}), { 'voxgig$entity': this.Name }])
+  }
+
+
+  toString() {
+    return this.Name + ' ' + this._utility.struct.jsonify(this._data)
+  }
+
+
+  [inspect.custom]() {
+    return this.toString()
+  }
+
+
+  _unexpected(this: any, ctx: Context, err: any) {
+    const clean = this._utility.clean
+    const struct = this._utility.struct
+
+    const clone = struct.clone
+    const merge = struct.merge
+
+    const ctrl = ctx.ctrl
+
+    ctrl.err = err
+
+    if (ctrl.explain) {
+      this._utility.cleanExplain(ctx)
+
+      if (null != ctx.result && null != ctx.result.err) {
+        ctrl.explain.err = clean(ctx, merge([
+          clone({ err: ctx.result.err }).err,
+          {
+            message: ctx.result.err.message,
+            stack: ctx.result.err.stack,
+          }]))
+      }
+
+      const cleanerr = clean(ctx, merge([
+        clone({ err }).err,
+        {
+          message: err.message,
+          stack: err.stack,
+        }]))
+
+      if (null == ctrl.explain.err) {
+        ctrl.explain.err = cleanerr
+      }
+      else if (ctrl.explain.err.message != cleanerr.message) {
+        ctrl.explain.unexpected = cleanerr
+      }
+    }
+
+    if (false === ctrl.throw) {
+      return undefined
+    }
+
+    // An error a hook threw never passed through makeError.
+    return clean(ctx, err)
+  }
+
+}
+
+
+export {
+  ProjectNameEntityBase
+}

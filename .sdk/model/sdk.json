@@ -1,0 +1,1138 @@
+{
+  "NAME": "NAGER-DATE-SDK",
+  "Name": "NagerDateSdk",
+  "def": "openapi.json",
+  "main": {
+    "api": {
+      "entity": {},
+      "guide": {}
+    },
+    "custom": {
+      "plurals": {}
+    },
+    "def": {
+      "desc": ""
+    },
+    "kit": {
+      "author": {
+        "name": "",
+        "url": ""
+      },
+      "config": {
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ],
+        "headers": {
+          "content-type": "application/json"
+        },
+        "repr": "auto"
+      },
+      "contributor": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "github-pages": {
+            "active": false,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "github-pages",
+            "name": "github-pages",
+            "origname": "",
+            "output": {
+              "path": "docs"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          },
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
+      "entity": {
+        "country": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": {
+            "borders": {
+              "a": true,
+              "h": "Borders",
+              "n": "borders",
+              "r": false,
+              "sh": "Neighboring countries based on geographical borders.",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$NULL`",
+                  "`$ARRAY`"
+                ]
+              ]
+            },
+            "commonName": {
+              "a": true,
+              "h": "Common Name",
+              "n": "commonName",
+              "r": true,
+              "sh": "The commonly used name of the country.",
+              "t": "`$STRING`"
+            },
+            "countryCode": {
+              "a": true,
+              "h": "Country Code",
+              "n": "countryCode",
+              "r": true,
+              "sh": "ISO 3166-1 alpha-2 country code.",
+              "t": "`$STRING`"
+            },
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "nativeName": {
+              "a": true,
+              "h": "Native Name",
+              "n": "nativeName",
+              "r": true,
+              "sh": "The name of the country in its native language.",
+              "t": "`$STRING`"
+            },
+            "officialName": {
+              "a": true,
+              "h": "Official Name",
+              "n": "officialName",
+              "r": true,
+              "sh": "The official name of the country.",
+              "t": "`$STRING`"
+            },
+            "region": {
+              "a": true,
+              "h": "Region",
+              "n": "region",
+              "r": true,
+              "sh": "Geopolitical or continental region of the country.",
+              "t": "`$STRING`"
+            }
+          },
+          "id": {
+            "field": "id",
+            "name": "id"
+          },
+          "name": "country",
+          "op": {
+            "load": {
+              "input": "data",
+              "name": "load",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /api/v4/Countries/{countryCode}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "params": [
+                      {
+                        "a": true,
+                        "ex": "us",
+                        "k": "param",
+                        "n": "id",
+                        "or": "countryCode",
+                        "r": true,
+                        "t": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/v4/Countries/{countryCode}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
+                  },
+                  "r": {
+                    "param": {
+                      "countryCode": "id"
+                    }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "api"
+                    },
+                    {
+                      "lit": "v4"
+                    },
+                    {
+                      "lit": "Countries"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": []
+          }
+        },
+        "country_v4_dto": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": {
+            "countryCode": {
+              "a": true,
+              "h": "Country Code",
+              "n": "countryCode",
+              "r": true,
+              "sh": "The ISO 3166-1 alpha-2 country code (e.g., \"US\", \"DE\").",
+              "t": "`$STRING`"
+            },
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": true,
+              "sh": "The common name of the country.",
+              "t": "`$STRING`"
+            }
+          },
+          "name": "country_v4_dto",
+          "op": {
+            "list": {
+              "input": "data",
+              "name": "list",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /api/v4/Countries/Available",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/v4/Countries/Available",
+                  "q": {},
+                  "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "api"
+                    },
+                    {
+                      "lit": "v4"
+                    },
+                    {
+                      "lit": "Countries"
+                    },
+                    {
+                      "lit": "Available"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": []
+          }
+        },
+        "iot_holiday": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": {},
+          "name": "iot_holiday",
+          "op": {
+            "load": {
+              "input": "data",
+              "name": "load",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /api/v4/IotHolidays/{isoCode}/IsToday/{offset}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "params": [
+                      {
+                        "a": true,
+                        "ex": "us",
+                        "k": "param",
+                        "n": "iot_holiday_id",
+                        "or": "isoCode",
+                        "r": true,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": 0,
+                        "k": "param",
+                        "n": "offset",
+                        "or": "offset",
+                        "r": true,
+                        "t": "`$INTEGER`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/v4/IotHolidays/{isoCode}/IsToday/{offset}",
+                  "q": {
+                    "exist": [
+                      "iot_holiday_id",
+                      "offset"
+                    ]
+                  },
+                  "r": {
+                    "param": {
+                      "isoCode": "iot_holiday_id"
+                    }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "api"
+                    },
+                    {
+                      "lit": "v4"
+                    },
+                    {
+                      "lit": "IotHolidays"
+                    },
+                    {
+                      "var": "iot_holiday_id"
+                    },
+                    {
+                      "lit": "IsToday"
+                    },
+                    {
+                      "var": "offset"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": []
+          }
+        },
+        "public_holiday_v4_dto": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": {
+            "countryCode": {
+              "a": true,
+              "h": "Country Code",
+              "n": "countryCode",
+              "r": true,
+              "sh": "ISO 3166-1 alpha-2 country code.",
+              "t": "`$STRING`"
+            },
+            "date": {
+              "a": true,
+              "fo": "date",
+              "h": "Date",
+              "n": "date",
+              "r": true,
+              "sh": "The date of the holiday.",
+              "t": "`$STRING`"
+            },
+            "holidayTypes": {
+              "a": true,
+              "h": "Holiday Types",
+              "n": "holidayTypes",
+              "r": true,
+              "sh": "List of holiday types this holiday is classified under.",
+              "t": "`$ARRAY`"
+            },
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": true,
+              "sh": "English name of the holiday.",
+              "t": "`$STRING`"
+            },
+            "nationalHoliday": {
+              "a": true,
+              "h": "National Holiday",
+              "n": "nationalHoliday",
+              "r": false,
+              "sh": "Indicates if this holiday applies to the entire country.",
+              "t": "`$BOOLEAN`"
+            },
+            "subdivisionCodes": {
+              "a": true,
+              "h": "Subdivision Codes",
+              "n": "subdivisionCodes",
+              "r": false,
+              "sh": "ISO-3166-2 codes of the subdivisions where this holiday applies",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$NULL`",
+                  "`$ARRAY`"
+                ]
+              ]
+            }
+          },
+          "name": "public_holiday_v4_dto",
+          "op": {
+            "list": {
+              "input": "data",
+              "name": "list",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /api/v4/Holidays/{countryCode}/{year}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "params": [
+                      {
+                        "a": true,
+                        "ex": "us",
+                        "k": "param",
+                        "n": "country_code",
+                        "or": "countryCode",
+                        "r": true,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": 2026,
+                        "k": "param",
+                        "n": "year",
+                        "or": "year",
+                        "r": true,
+                        "t": "`$INTEGER`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/v4/Holidays/{countryCode}/{year}",
+                  "q": {
+                    "exist": [
+                      "country_code",
+                      "year"
+                    ]
+                  },
+                  "r": {
+                    "param": {
+                      "countryCode": "country_code"
+                    }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "api"
+                    },
+                    {
+                      "lit": "v4"
+                    },
+                    {
+                      "lit": "Holidays"
+                    },
+                    {
+                      "var": "country_code"
+                    },
+                    {
+                      "var": "year"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                },
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /api/v4/Holidays/{countryCode}/Next",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "params": [
+                      {
+                        "a": true,
+                        "ex": "us",
+                        "k": "param",
+                        "n": "country_code",
+                        "or": "countryCode",
+                        "r": true,
+                        "t": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/v4/Holidays/{countryCode}/Next",
+                  "q": {
+                    "exist": [
+                      "country_code"
+                    ]
+                  },
+                  "r": {
+                    "param": {
+                      "countryCode": "country_code"
+                    }
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "api"
+                    },
+                    {
+                      "lit": "v4"
+                    },
+                    {
+                      "lit": "Holidays"
+                    },
+                    {
+                      "var": "country_code"
+                    },
+                    {
+                      "lit": "Next"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": []
+          }
+        },
+        "version": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": {
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": true,
+              "sh": "The name of the library.",
+              "t": "`$STRING`"
+            },
+            "version": {
+              "a": true,
+              "h": "Version",
+              "n": "version",
+              "r": true,
+              "sh": "The version of the library.",
+              "t": "`$STRING`"
+            }
+          },
+          "name": "version",
+          "op": {
+            "load": {
+              "input": "data",
+              "name": "load",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /api/v4/Versions",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/v4/Versions",
+                  "q": {},
+                  "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
+                  "s": [
+                    {
+                      "lit": "api"
+                    },
+                    {
+                      "lit": "v4"
+                    },
+                    {
+                      "lit": "Versions"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": []
+          }
+        }
+      },
+      "feature": {
+        "test": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false
+            },
+            "optspec": {
+              "entity": "`$MAP`",
+              "net": "`$MAP`"
+            },
+            "strict": false
+          },
+          "description": "In-memory mock transport for testing without a live server",
+          "hook": {
+            "GetData": {
+              "active": true,
+              "await": false
+            },
+            "GetMatch": {
+              "active": true,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": true,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": true,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PrePoint": {
+              "active": true,
+              "await": false
+            },
+            "PreRequest": {
+              "active": true,
+              "await": false
+            },
+            "PreResponse": {
+              "active": true,
+              "await": false
+            },
+            "PreResult": {
+              "active": true,
+              "await": false
+            },
+            "PreSpec": {
+              "active": true,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": true,
+              "await": false
+            },
+            "SetMatch": {
+              "active": true,
+              "await": false
+            }
+          },
+          "name": "test",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Test transport",
+          "transport": "base",
+          "version": "0.0.1"
+        }
+      },
+      "flow": {
+        "BasicCountryFlow": {
+          "active": true,
+          "entity": "country",
+          "key$": "BasicCountryFlow",
+          "kind": "basic",
+          "name": "BasicCountryFlow",
+          "param": {},
+          "step": [
+            {
+              "a": true,
+              "d": {},
+              "i": {
+                "ref": "country_ref01",
+                "srcdatavar": "country_ref01_data",
+                "suffix": "_dt0"
+              },
+              "m": {
+                "id": "country01"
+              },
+              "o": "load",
+              "s": [],
+              "v": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-country_ref01"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "BasicCountryV4DtoFlow": {
+          "active": true,
+          "entity": "country_v4_dto",
+          "key$": "BasicCountryV4DtoFlow",
+          "kind": "basic",
+          "name": "BasicCountryV4DtoFlow",
+          "param": {},
+          "step": [
+            {
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
+                {
+                  "apply": "ItemExists",
+                  "def": {
+                    "ref": "country_v4_dto_ref01"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "BasicIotHolidayFlow": {
+          "active": true,
+          "entity": "iot_holiday",
+          "key$": "BasicIotHolidayFlow",
+          "kind": "basic",
+          "name": "BasicIotHolidayFlow",
+          "param": {},
+          "step": [
+            {
+              "a": true,
+              "d": {},
+              "i": {
+                "ref": "iot_holiday_ref01",
+                "srcdatavar": "iot_holiday_ref01_data",
+                "suffix": "_dt0"
+              },
+              "m": {
+                "id": "iot_holiday01",
+                "iot_holiday_id": "iot_holiday01"
+              },
+              "o": "load",
+              "s": [],
+              "v": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-iot_holiday_ref01"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "BasicPublicHolidayV4DtoFlow": {
+          "active": true,
+          "entity": "public_holiday_v4_dto",
+          "key$": "BasicPublicHolidayV4DtoFlow",
+          "kind": "basic",
+          "name": "BasicPublicHolidayV4DtoFlow",
+          "param": {},
+          "step": [
+            {
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {
+                "country_code": "country_code01"
+              },
+              "o": "list",
+              "s": [],
+              "v": [
+                {
+                  "apply": "ItemExists",
+                  "def": {
+                    "ref": "public_holiday_v4_dto_ref01"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "BasicVersionFlow": {
+          "active": true,
+          "entity": "version",
+          "key$": "BasicVersionFlow",
+          "kind": "basic",
+          "name": "BasicVersionFlow",
+          "param": {},
+          "step": [
+            {
+              "a": true,
+              "d": {},
+              "i": {
+                "ref": "version_ref01",
+                "srcdatavar": "version_ref01_data",
+                "suffix": "_dt0"
+              },
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-version_ref01"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "info": {
+        "auth": false,
+        "contact": {
+          "email": "hello@nager.software",
+          "name": "Nager Software Solutions"
+        },
+        "description": "The Nager.Date Community API is a public service that provides reliable information about public holidays for countries around the world. It allows developers to query national holiday dates, check whether a specific day is a public holiday and list upcoming holidays.\r\n\r\n\r\n\r\nBy using the API, you agree to the <a href=\"https://date.nager.at/Legal/TermsOfService\">Terms of Service.</a>",
+        "servers": [
+          {
+            "url": "{base}",
+            "variables": {
+              "base": {
+                "description": "The base URL of the API, which its definition does not name."
+              }
+            }
+          }
+        ],
+        "summary": "The Nager.Date Community API is a public service that provides reliable information about public holidays for countries around the world.",
+        "termsOfService": "https://date.nager.at/Legal/TermsOfService",
+        "title": "Community - API V4",
+        "version": "v4",
+        "website": "https://date.nager.at/Legal/TermsOfService"
+      },
+      "option": {},
+      "optspec": {
+        "allow": {
+          "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
+          "op": "create,update,patch,load,list,remove,command,direct,graphql"
+        },
+        "apikey": "",
+        "auth": {
+          "basic": false,
+          "in": "",
+          "name": "",
+          "prefix": ""
+        },
+        "base": "http://localhost:8000",
+        "clean": {
+          "active": true,
+          "hint": "0",
+          "keys": "key,secret,token,password,passwd,authorization,cookie,credential,signature",
+          "mask": "[redacted]",
+          "min": "4",
+          "values": ""
+        },
+        "entity": {
+          "`$CHILD`": {
+            "`$OPEN`": true,
+            "active": false,
+            "alias": {}
+          }
+        },
+        "extend": "`$ANY`",
+        "headers": {
+          "`$CHILD`": "`$STRING`"
+        },
+        "prefix": "",
+        "secret": "",
+        "server": {
+          "`$CHILD`": ""
+        },
+        "suffix": "",
+        "system": {
+          "fetch": "`$ANY`"
+        },
+        "test": {
+          "active": false,
+          "entity": {
+            "`$OPEN`": true
+          }
+        },
+        "utility": {}
+      },
+      "phase": {
+        "build": {
+          "active": true
+        },
+        "top": {
+          "active": true
+        }
+      },
+      "publisher": {
+        "name": "",
+        "security": "",
+        "url": ""
+      },
+      "repo": {
+        "host": "github.com",
+        "path": ""
+      },
+      "target": {
+        "ts": {
+          "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "comment": {
+            "line": "//"
+          },
+          "deps": {
+            "@types/node": {
+              "active": true,
+              "kind": "dev",
+              "version": "^25.6.0"
+            },
+            "typescript": {
+              "active": true,
+              "kind": "dev",
+              "version": "^5.9.3"
+            }
+          },
+          "ext": "ts",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
+          "module": {
+            "goversion": "",
+            "name": "nager-date-sdk",
+            "package": "",
+            "path": ""
+          },
+          "name": "ts",
+          "origname": "",
+          "output": {
+            "adopt": false,
+            "create": true,
+            "path": "",
+            "repo": "",
+            "root": false,
+            "sdkrel": ""
+          },
+          "package": "@voxgig/sdkgen",
+          "provides": {
+            "schema": true,
+            "sekreto": true
+          },
+          "publish": {
+            "registry": {
+              "active": false,
+              "name": "npm",
+              "package": "",
+              "state": "pending",
+              "url": "https://registry.npmjs.org",
+              "vault": {
+                "alias": "npm",
+                "env": "",
+                "recipe": "npm"
+              }
+            },
+            "tag": {
+              "active": true,
+              "prefix": "",
+              "vault": {
+                "alias": "github",
+                "recipe": "github"
+              },
+              "via": "port"
+            },
+            "version": "0.0.1"
+          },
+          "superseded": [
+            "test/runner.ts",
+            "test/vendor/omni/compat.ts",
+            "src/feature/secrets/sekreto/Providers.ts",
+            "src/feature/secrets/sekreto/Sigv4.ts",
+            "src/feature/secrets/sekreto/provider/Registry.ts",
+            "src/feature/secrets/sekreto/provider/http.ts"
+          ],
+          "title": "TypeScript"
+        }
+      },
+      "test": {
+        "live": {
+          "app": false,
+          "base": "",
+          "strict": true
+        }
+      },
+      "text": {
+        "about_md": "",
+        "docs_url": "",
+        "entity_desc": {},
+        "homepage": "",
+        "meta_source": "",
+        "summary": "",
+        "tagline": "",
+        "title": "",
+        "website": ""
+      }
+    }
+  },
+  "name": "nager-date-sdk",
+  "name-": "nager-date-sdk",
+  "name_": "nager_date_sdk",
+  "name__orig": "nager-date-sdk",
+  "origin": "voxgig-sdk"
+}

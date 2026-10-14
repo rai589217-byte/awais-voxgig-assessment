@@ -1,0 +1,27 @@
+# Local config / secrets
+.env
+.env.*
+*.local.*
+*.local
+
+# Dependencies (no trailing slash: also ignores node_modules SYMLINKS, e.g.
+# ts/node_modules -> shared tree, which a dir-only rule leaves tracked)
+node_modules
+ts/dist
+ts/dist-test
+.sdk/dist
+.sdk/dist-test
+
+# Local Windows compatibility junction used only while running generation.
+/.sdk/model/tm/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+
+# Editor
+*~
+*.swp

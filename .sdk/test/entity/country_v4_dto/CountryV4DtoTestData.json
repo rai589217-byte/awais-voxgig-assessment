@@ -1,0 +1,33 @@
+{
+  "existing": {
+    "country_v4_dto": {
+      "COUNTRY_V4_DTO00": {
+        "countryCode": "s14",
+        "name": "s15"
+      },
+      "COUNTRY_V4_DTO01": {
+        "countryCode": "s28",
+        "name": "s29"
+      },
+      "COUNTRY_V4_DTO02": {
+        "countryCode": "s3c",
+        "name": "s3d"
+      }
+    }
+  },
+  "new": {
+    "country_v4_dto": {
+      "country_v4_dto_ref01": {
+        "countryCode": "s50",
+        "name": "s51"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/v4/Countries/Available": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

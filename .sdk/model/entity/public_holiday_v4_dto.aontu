@@ -1,0 +1,191 @@
+# Entity: public_holiday_v4_dto
+
+main: kit: entity: public_holiday_v4_dto: {
+
+  alias: field: {}
+
+  fields: {
+    countryCode: {
+      h: "Country Code"
+      n: "countryCode"
+      r: true
+      sh: "ISO 3166-1 alpha-2 country code."
+      t: "`$STRING`"
+    }
+    date: {
+      fo: "date"
+      h: "Date"
+      n: "date"
+      r: true
+      sh: "The date of the holiday."
+      t: "`$STRING`"
+    }
+    holidayTypes: {
+      h: "Holiday Types"
+      n: "holidayTypes"
+      r: true
+      sh: "List of holiday types this holiday is classified under."
+      t: "`$ARRAY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      sh: "English name of the holiday."
+      t: "`$STRING`"
+    }
+    nationalHoliday: {
+      h: "National Holiday"
+      n: "nationalHoliday"
+      r: false
+      sh: "Indicates if this holiday applies to the entire country."
+      t: "`$BOOLEAN`"
+    }
+    subdivisionCodes: {
+      h: "Subdivision Codes"
+      n: "subdivisionCodes"
+      r: false
+      sh: "ISO-3166-2 codes of the subdivisions where this holiday applies"
+      t: [
+        "`$ONE`"
+        [
+          "`$NULL`"
+          "`$ARRAY`"
+        ]
+      ]
+    }
+  }
+
+  name: "public_holiday_v4_dto"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/v4/Holidays/{countryCode}/{year}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "us"
+                k: "param"
+                n: "country_code"
+                or: "countryCode"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: 2026
+                k: "param"
+                n: "year"
+                or: "year"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/v4/Holidays/{countryCode}/{year}"
+          q: {
+            exist: [
+              "country_code"
+              "year"
+            ]
+          }
+          r: {
+            param: {
+              countryCode: "country_code"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v4"
+            }
+            {
+              lit: "Holidays"
+            }
+            {
+              var: "country_code"
+            }
+            {
+              var: "year"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/v4/Holidays/{countryCode}/Next"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "us"
+                k: "param"
+                n: "country_code"
+                or: "countryCode"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/v4/Holidays/{countryCode}/Next"
+          q: {
+            exist: [
+              "country_code"
+            ]
+          }
+          r: {
+            param: {
+              countryCode: "country_code"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v4"
+            }
+            {
+              lit: "Holidays"
+            }
+            {
+              var: "country_code"
+            }
+            {
+              lit: "Next"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

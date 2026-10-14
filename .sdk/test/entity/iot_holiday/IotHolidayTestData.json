@@ -1,0 +1,33 @@
+{
+  "existing": {
+    "iot_holiday": {
+      "IOT_HOLIDAY00": {
+        "iot_holiday_id": "IOT_HOLIDAY01",
+        "offset": "OFFSET01",
+        "id": "IOT_HOLIDAY00"
+      },
+      "IOT_HOLIDAY01": {
+        "iot_holiday_id": "IOT_HOLIDAY01",
+        "offset": "OFFSET01",
+        "id": "IOT_HOLIDAY01"
+      },
+      "IOT_HOLIDAY02": {
+        "iot_holiday_id": "IOT_HOLIDAY01",
+        "offset": "OFFSET01",
+        "id": "IOT_HOLIDAY02"
+      }
+    }
+  },
+  "new": {
+    "iot_holiday": {
+      "iot_holiday_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /api/v4/IotHolidays/{isoCode}/IsToday/{offset}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,89 @@
+# Entity: iot_holiday
+
+main: kit: entity: iot_holiday: {
+
+  alias: field: {}
+
+  name: "iot_holiday"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/v4/IotHolidays/{isoCode}/IsToday/{offset}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "us"
+                k: "param"
+                n: "iot_holiday_id"
+                or: "isoCode"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: 0
+                k: "param"
+                n: "offset"
+                or: "offset"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/v4/IotHolidays/{isoCode}/IsToday/{offset}"
+          q: {
+            exist: [
+              "iot_holiday_id"
+              "offset"
+            ]
+          }
+          r: {
+            param: {
+              isoCode: "iot_holiday_id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v4"
+            }
+            {
+              lit: "IotHolidays"
+            }
+            {
+              var: "iot_holiday_id"
+            }
+            {
+              lit: "IsToday"
+            }
+            {
+              var: "offset"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

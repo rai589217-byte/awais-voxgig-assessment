@@ -1,0 +1,19 @@
+# Local config / secrets
+*.local.*
+*.local
+
+# Dependencies (no trailing slash: also ignores node_modules SYMLINKS, e.g.
+# .sdk/node_modules -> shared tree, which a dir-only rule leaves tracked)
+node_modules
+
+# Build output
+dist/
+dist-test/
+*.tsbuildinfo
+
+# Generated logs. Not log/ itself: it holds sdkgen's copy record
+# (log/copies.jsonl), which belongs in the repository.
+*.log
+
+# OS
+.DS_Store

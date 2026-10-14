@@ -1,0 +1,60 @@
+{
+  "existing": {
+    "public_holiday_v4_dto": {
+      "PUBLIC_HOLIDAY_V4_DTO00": {
+        "countryCode": "s3c",
+        "date": "s3d",
+        "holidayTypes": [],
+        "name": "s3f",
+        "nationalHoliday": true,
+        "subdivisionCodes": "s41",
+        "country_code": "COUNTRY_CODE01",
+        "year": "YEAR01"
+      },
+      "PUBLIC_HOLIDAY_V4_DTO01": {
+        "countryCode": "s78",
+        "date": "s79",
+        "holidayTypes": [],
+        "name": "s7b",
+        "nationalHoliday": true,
+        "subdivisionCodes": "s7d",
+        "country_code": "COUNTRY_CODE01",
+        "year": "YEAR01"
+      },
+      "PUBLIC_HOLIDAY_V4_DTO02": {
+        "countryCode": "sb4",
+        "date": "sb5",
+        "holidayTypes": [],
+        "name": "sb7",
+        "nationalHoliday": true,
+        "subdivisionCodes": "sb9",
+        "country_code": "COUNTRY_CODE01",
+        "year": "YEAR01"
+      }
+    }
+  },
+  "new": {
+    "public_holiday_v4_dto": {
+      "public_holiday_v4_dto_ref01": {
+        "countryCode": "sf0",
+        "date": "sf1",
+        "holidayTypes": [],
+        "name": "sf3",
+        "nationalHoliday": true,
+        "subdivisionCodes": "sf5"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/v4/Holidays/{countryCode}/{year}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /api/v4/Holidays/{countryCode}/Next": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

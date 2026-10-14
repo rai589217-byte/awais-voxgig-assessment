@@ -1,0 +1,52 @@
+{
+  "existing": {
+    "country": {
+      "COUNTRY00": {
+        "borders": "s46",
+        "commonName": "s47",
+        "countryCode": "s48",
+        "id": "COUNTRY00",
+        "nativeName": "s4a",
+        "officialName": "s4b",
+        "region": "s4c"
+      },
+      "COUNTRY01": {
+        "borders": "s8c",
+        "commonName": "s8d",
+        "countryCode": "s8e",
+        "id": "COUNTRY01",
+        "nativeName": "s90",
+        "officialName": "s91",
+        "region": "s92"
+      },
+      "COUNTRY02": {
+        "borders": "sd2",
+        "commonName": "sd3",
+        "countryCode": "sd4",
+        "id": "COUNTRY02",
+        "nativeName": "sd6",
+        "officialName": "sd7",
+        "region": "sd8"
+      }
+    }
+  },
+  "new": {
+    "country": {
+      "country_ref01": {
+        "borders": "s118",
+        "commonName": "s119",
+        "countryCode": "s11a",
+        "nativeName": "s11c",
+        "officialName": "s11d",
+        "region": "s11e"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/v4/Countries/{countryCode}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

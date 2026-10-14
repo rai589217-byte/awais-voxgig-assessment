@@ -1,0 +1,33 @@
+{
+  "files": [
+    "SUMMARY.md"
+  ],
+  "config": ".sdk/doc/qa/vale.ini",
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "> The Nager.Date Community API is a public service that provides reliable information about public holidays for countries around the world. It allows developers to query national holiday dates, check whether a specific day is a public holiday and list upcoming holidays.\n>\n> By using the API, you agree to the &lt;a href=&quot;https://date.nager.at/Legal/TermsOfService&quot;&gt;Terms of Service.&lt;/a&gt;",
+      "A list of upcoming public holidays for the next 365 days.",
+      "English name of the holiday.",
+      "ISO 3166-1 alpha-2 country code.",
+      "Indicates if this holiday applies to the entire country.",
+      "List of holiday types this holiday is classified under.",
+      "Neighboring countries based on geographical borders.",
+      "No upcoming holidays were found for the specified country",
+      "Returns the requested country information",
+      "Successfully retrieved the list of public holidays.",
+      "Successfully retrieved version information",
+      "Successfully returns the list of supported countries",
+      "The ISO 3166-1 alpha-2 country code (for example, &quot;US&quot;, &quot;DE&quot;).",
+      "The common name of the country.",
+      "The commonly used name of the country.",
+      "The date of the holiday.",
+      "The name of the country in its native language.",
+      "The name of the library.",
+      "The official name of the country.",
+      "The version of the library.",
+      "Today is a public holiday",
+      "Today is not a public holiday"
+    ]
+  }
+}

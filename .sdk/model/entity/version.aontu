@@ -1,0 +1,63 @@
+# Entity: version
+
+main: kit: entity: version: {
+
+  alias: field: {}
+
+  fields: {
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      sh: "The name of the library."
+      t: "`$STRING`"
+    }
+    version: {
+      h: "Version"
+      n: "version"
+      r: true
+      sh: "The version of the library."
+      t: "`$STRING`"
+    }
+  }
+
+  name: "version"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/v4/Versions"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/v4/Versions"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v4"
+            }
+            {
+              lit: "Versions"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

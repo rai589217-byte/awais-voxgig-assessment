@@ -1,0 +1,68 @@
+  # A repository without a Pages site skips the deployment with a notice
+  # rather than failing every push. This job only reads the site: creating one
+  # is a repository setting, which .sdk/admin/setup-github-pages.sh changes.
+  pages:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/{{branch}}'
+    needs: check
+    runs-on: ubuntu-latest
+    permissions:
+      pages: read
+    outputs:
+      site: ${{ steps.site.outputs.site }}
+    steps:
+      - name: Look for the GitHub Pages site
+        id: site
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          status="$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' \
+            --header "Authorization: Bearer $GITHUB_TOKEN" \
+            --header 'Accept: application/vnd.github+json' \
+            "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/pages")"
+          case "$status" in
+            200)
+              echo 'site=true' >> "$GITHUB_OUTPUT" ;;
+            404)
+              echo 'site=false' >> "$GITHUB_OUTPUT"
+              echo "::notice title=GitHub Pages is not enabled::This repository has no GitHub Pages site, so the documentation website was not deployed. To publish it, run .sdk/admin/setup-github-pages.sh, which sets GitHub Actions as the Pages source. To stop generating it, set main: kit: doc: edition: 'github-pages': active: false in .sdk/model/project.aontu and regenerate." ;;
+            *)
+              echo "::error::Reading the GitHub Pages site returned HTTP $status, so the deployment cannot tell whether the site exists."
+              exit 1 ;;
+          esac
+  deploy:
+    needs: pages
+    if: needs.pages.outputs.site == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: documentation
+          path: site-source
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+      # actions/upload-pages-artifact is a composite action whose own steps call
+      # actions/upload-artifact@v4 by tag. Organisations that require full-length
+      # SHA pinning reject that nested reference, and the caller cannot pin it.
+      # Inline the two steps it performs so every action resolves to a SHA.
+      - name: Archive the Pages artifact
+        run: |
+          tar \
+            --dereference --hard-dereference \
+            --directory site-source \
+            -cvf "$RUNNER_TEMP/artifact.tar" \
+            --exclude=.git \
+            --exclude=.github \
+            .
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: 1
+          if-no-files-found: error
+      - uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+        id: deployment

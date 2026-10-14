@@ -1,0 +1,7 @@
+# Entity Models
+
+@"./country.aontu"
+@"./country_v4_dto.aontu"
+@"./iot_holiday.aontu"
+@"./public_holiday_v4_dto.aontu"
+@"./version.aontu"

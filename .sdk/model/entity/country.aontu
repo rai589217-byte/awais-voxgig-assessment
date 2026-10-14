@@ -1,0 +1,133 @@
+# Entity: country
+
+main: kit: entity: country: {
+
+  alias: field: {}
+
+  fields: {
+    borders: {
+      h: "Borders"
+      n: "borders"
+      r: false
+      sh: "Neighboring countries based on geographical borders."
+      t: [
+        "`$ONE`"
+        [
+          "`$NULL`"
+          "`$ARRAY`"
+        ]
+      ]
+    }
+    commonName: {
+      h: "Common Name"
+      n: "commonName"
+      r: true
+      sh: "The commonly used name of the country."
+      t: "`$STRING`"
+    }
+    countryCode: {
+      h: "Country Code"
+      n: "countryCode"
+      r: true
+      sh: "ISO 3166-1 alpha-2 country code."
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    nativeName: {
+      h: "Native Name"
+      n: "nativeName"
+      r: true
+      sh: "The name of the country in its native language."
+      t: "`$STRING`"
+    }
+    officialName: {
+      h: "Official Name"
+      n: "officialName"
+      r: true
+      sh: "The official name of the country."
+      t: "`$STRING`"
+    }
+    region: {
+      h: "Region"
+      n: "region"
+      r: true
+      sh: "Geopolitical or continental region of the country."
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "country"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/v4/Countries/{countryCode}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "us"
+                k: "param"
+                n: "id"
+                or: "countryCode"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/v4/Countries/{countryCode}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              countryCode: "id"
+            }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v4"
+            }
+            {
+              lit: "Countries"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

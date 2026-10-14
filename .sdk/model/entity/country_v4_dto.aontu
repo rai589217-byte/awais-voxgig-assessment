@@ -1,0 +1,66 @@
+# Entity: country_v4_dto
+
+main: kit: entity: country_v4_dto: {
+
+  alias: field: {}
+
+  fields: {
+    countryCode: {
+      h: "Country Code"
+      n: "countryCode"
+      r: true
+      sh: "The ISO 3166-1 alpha-2 country code (e.g., \"US\", \"DE\")."
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      sh: "The common name of the country."
+      t: "`$STRING`"
+    }
+  }
+
+  name: "country_v4_dto"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/v4/Countries/Available"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/v4/Countries/Available"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v4"
+            }
+            {
+              lit: "Countries"
+            }
+            {
+              lit: "Available"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

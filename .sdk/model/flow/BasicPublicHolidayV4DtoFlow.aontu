@@ -1,0 +1,26 @@
+# BasicPublicHolidayV4DtoFlow
+
+main: kit: flow: BasicPublicHolidayV4DtoFlow:
+{
+  entity: "public_holiday_v4_dto",
+  kind: "basic",
+  name: "BasicPublicHolidayV4DtoFlow",
+  step: [
+    {
+      m: {
+        country_code: "country_code01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "public_holiday_v4_dto_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicPublicHolidayV4DtoFlow"
+}
